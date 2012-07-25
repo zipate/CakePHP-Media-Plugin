@@ -18,7 +18,7 @@
  *     ));
  * }}}
  *
- * Copyright (c) 2007-2012 David Persson
+ * Copyright (c) 2007-2011 David Persson
  *
  * Distributed under the terms of the MIT License.
  * Redistributions of files must retain the above copyright notice.
@@ -28,7 +28,7 @@
  *
  * @package    media
  * @subpackage media.config
- * @copyright  2007-2012 David Persson <davidpersson@gmx.de>
+ * @copyright  2007-2011 David Persson <davidpersson@gmx.de>
  * @license    http://www.opensource.org/licenses/mit-license.php The MIT License
  * @link       http://github.com/davidpersson/media
  * @since      media 0.50
@@ -104,7 +104,7 @@ if (!defined('MEDIA_FILTER')) {
 	define('MEDIA_FILTER', MEDIA . 'filter' . DS);
 }
 if (!defined('MEDIA_TRANSFER')) {
-	define('MEDIA_TRANSFER', MEDIA . 'transfer' . DS);
+	define('MEDIA_TRANSFER', APP. 'Media' . DS . 'transfer' . DS);
 }
 
 /**
@@ -231,15 +231,16 @@ Media_Info::config(array(
  */
 // $sRGB = $mm . DS . 'data' . DS . 'sRGB_IEC61966-2-1_black_scaled.icc';
 
-$s = array('convert' => 'image/png', 'zoomCrop' => array(100, 100));
-$m = array('convert' => 'image/png', 'fitCrop' => array(300, 300));
-$l = array('convert' => 'image/png', 'fit' => array(600, 440));
+$s = array('convert' => 'image/jpeg', 'fitCrop' => array(100, 100));
+$m = array('convert' => 'image/jpeg', 'fit' => array(300, 300));
+$l = array('convert' => 'image/jpeg', 'fit' => array(600, 440));
+$original = array('clone'=>'copy');
 
 Configure::write('Media.filter', array('default' => array(
 	'audio' => compact('s', 'm'),
-	'document' => compact('s', 'm'),
-	'generic' => array(),
-	'image' => compact('s', 'm', 'l'),
+	'document' => compact('s', 'm','original'),
+	'generic' => array('original'=>array('clone'=>'copy')),
+	'image' => compact('s', 'm', 'l','original'),
 	'video' => compact('s', 'm')
 )));
 
