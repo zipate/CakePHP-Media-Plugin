@@ -94,7 +94,7 @@ class GeneratorBehavior extends ModelBehavior {
  * @param array $settings See defaultSettings for configuration options
  * @return void
  */
-	public function setup($Model, $settings = array()) {
+	public function setup(Model $Model, $settings = array()) {
 		$this->_defaultSettings['filter'] = $Model->alias;
 
 		if (!isset($this->settings[$Model->alias])) {
@@ -114,7 +114,7 @@ class GeneratorBehavior extends ModelBehavior {
  * @param boolean $created
  * @return boolean
  */
-	public function afterSave($Model, $created) {
+	public function afterSave(Model $Model, $created) {
 		$item = $Model->data[$Model->alias];
 
 		if (isset($item['dirname'], $item['basename'])) {

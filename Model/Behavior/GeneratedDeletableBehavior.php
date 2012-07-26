@@ -1,6 +1,7 @@
 <?php
 class GeneratedDeletableBehavior extends ModelBehavior {
-	public function beforeDelete($Model, $cascade = true) {
+    
+	public function beforeDelete(Model $Model, $cascade = true) {
 		if (!$cascade) {
 			return true;
 		}

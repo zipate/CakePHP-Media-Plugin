@@ -126,7 +126,7 @@ class TransferBehavior extends ModelBehavior {
  * @param array $settings See defaultSettings for configuration options
  * @return void
  */
-	public function setup($Model, $settings = array()) {
+	public function setup(Model $Model, $settings = array()) {
 		/* If present validation rules get some sane default values */
 		if (isset($Model->validate['file'])) {
 			$default = array('allowEmpty' => true, 'required' => false, 'last' => true);
@@ -155,7 +155,7 @@ class TransferBehavior extends ModelBehavior {
  * @param Model $Model
  * @return boolean
  */
-	public function beforeValidate($Model) {
+	public function beforeValidate(Model $Model) {
 		if (!isset($Model->data[$Model->alias]['file'])) {
 			return true;
 		}
@@ -181,7 +181,7 @@ class TransferBehavior extends ModelBehavior {
  * @param Model $Model
  * @return boolean
  */
-	public function beforeSave($Model) {
+	public function beforeSave(Model $Model) {
 		if (!isset($Model->data[$Model->alias]['file'])) {
 			return true;
 		}
