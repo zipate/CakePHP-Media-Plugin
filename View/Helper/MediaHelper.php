@@ -2,7 +2,7 @@
 /**
  * Media Helper File
  *
- * Copyright (c) 2007-2011 David Persson
+ * Copyright (c) 2007-2012 David Persson
  *
  * Distributed under the terms of the MIT License.
  * Redistributions of files must retain the above copyright notice.
@@ -12,7 +12,7 @@
  *
  * @package    media
  * @subpackage media.views.helpers
- * @copyright  2007-2011 David Persson <davidpersson@gmx.de>
+ * @copyright  2007-2012 David Persson <davidpersson@gmx.de>
  * @license    http://www.opensource.org/licenses/mit-license.php The MIT License
  * @link       http://github.com/davidpersson/media
  */
@@ -186,7 +186,8 @@ class MediaHelper extends AppHelper {
 			'title' => null,
 			'class' => null,
 			'width' => null,
-			'height' => null
+			'height' => null,
+			'itemprop' => null
 		);
 
 		if (isset($options['url'])) {
@@ -540,7 +541,7 @@ class MediaHelper extends AppHelper {
  * @return array The modified attributes array.
  */
 	protected function _addDimensions($file, $attributes) {
-		if (isset($attributes['width']) || isset($attribues['height'])) {
+		if (isset($attributes['width']) || isset($attributes['height'])) {
 			return $attributes;
 		}
 		if (function_exists('getimagesize')) {

@@ -2,7 +2,7 @@
 /**
  * Generator Behavior File
  *
- * Copyright (c) 2007-2011 David Persson
+ * Copyright (c) 2007-2012 David Persson
  *
  * Distributed under the terms of the MIT License.
  * Redistributions of files must retain the above copyright notice.
@@ -12,7 +12,7 @@
  *
  * @package    media
  * @subpackage media.models.behaviors
- * @copyright  2007-2011 David Persson <davidpersson@gmx.de>
+ * @copyright  2007-2012 David Persson <davidpersson@gmx.de>
  * @license    http://www.opensource.org/licenses/mit-license.php The MIT License
  * @link       http://github.com/davidpersson/media
  */
@@ -94,7 +94,7 @@ class GeneratorBehavior extends ModelBehavior {
  * @param array $settings See defaultSettings for configuration options
  * @return void
  */
-	public function setup($Model, $settings = array()) {
+	public function setup(Model $Model, $settings = array()) {
 		$this->_defaultSettings['filter'] = $Model->alias;
 
 		if (!isset($this->settings[$Model->alias])) {
@@ -114,7 +114,7 @@ class GeneratorBehavior extends ModelBehavior {
  * @param boolean $created
  * @return boolean
  */
-	public function afterSave($Model, $created) {
+	public function afterSave(Model $Model, $created) {
 		$item = $Model->data[$Model->alias];
 
 		if (isset($item['dirname'], $item['basename'])) {

@@ -2,7 +2,7 @@
 /**
  * Transfer Behavior File
  *
- * Copyright (c) 2007-2011 David Persson
+ * Copyright (c) 2007-2012 David Persson
  *
  * Distributed under the terms of the MIT License.
  * Redistributions of files must retain the above copyright notice.
@@ -12,7 +12,7 @@
  *
  * @package    media
  * @subpackage media.models.behaviors
- * @copyright  2007-2011 David Persson <davidpersson@gmx.de>
+ * @copyright  2007-2012 David Persson <davidpersson@gmx.de>
  * @license    http://www.opensource.org/licenses/mit-license.php The MIT License
  * @link       http://github.com/davidpersson/media
  */
@@ -126,7 +126,7 @@ class TransferBehavior extends ModelBehavior {
  * @param array $settings See defaultSettings for configuration options
  * @return void
  */
-	public function setup($Model, $settings = array()) {
+	public function setup(Model $Model, $settings = array()) {
 		/* If present validation rules get some sane default values */
 		if (isset($Model->validate['file'])) {
 			$default = array('allowEmpty' => true, 'required' => false, 'last' => true);
@@ -155,7 +155,7 @@ class TransferBehavior extends ModelBehavior {
  * @param Model $Model
  * @return boolean
  */
-	public function beforeValidate($Model) {
+	public function beforeValidate(Model $Model) {
 		if (!isset($Model->data[$Model->alias]['file'])) {
 			return true;
 		}
@@ -181,7 +181,7 @@ class TransferBehavior extends ModelBehavior {
  * @param Model $Model
  * @return boolean
  */
-	public function beforeSave($Model) {
+	public function beforeSave(Model $Model) {
 		if (!isset($Model->data[$Model->alias]['file'])) {
 			return true;
 		}

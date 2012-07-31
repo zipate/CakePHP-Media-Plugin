@@ -2,7 +2,7 @@
 /**
  * Coupler Behavior File
  *
- * Copyright (c) 2007-2011 David Persson
+ * Copyright (c) 2007-2012 David Persson
  *
  * Distributed under the terms of the MIT License.
  * Redistributions of files must retain the above copyright notice.
@@ -12,7 +12,7 @@
  *
  * @package    media
  * @subpackage media.models.behaviors
- * @copyright  2007-2011 David Persson <davidpersson@gmx.de>
+ * @copyright  2007-2012 David Persson <davidpersson@gmx.de>
  * @license    http://www.opensource.org/licenses/mit-license.php The MIT License
  * @link       http://github.com/davidpersson/media
  */
@@ -72,7 +72,7 @@ class CouplerBehavior extends ModelBehavior {
  * @param array $settings See defaultSettings for configuration options
  * @return void
  */
-	public function setup($Model, $settings = array()) {
+	public function setup(Model $Model, $settings = array()) {
 		if (!isset($this->settings[$Model->alias])) {
 			$this->settings[$Model->alias] = $this->_defaultSettings;
 		}
@@ -97,7 +97,7 @@ class CouplerBehavior extends ModelBehavior {
  * @param Model $Model
  * @return boolean
  */
-	public function beforeSave($Model) {
+	public function beforeSave(Model $Model) {
 		if (!$Model->exists()) {
 			if (!isset($Model->data[$Model->alias]['file'])) {
 				unset($Model->data[$Model->alias]);
@@ -160,7 +160,7 @@ class CouplerBehavior extends ModelBehavior {
  * @param boolean $cascade
  * @return boolean
  */
-	public function beforeDelete($Model, $cascade = true) {
+	public function beforeDelete(Model $Model, $cascade = true) {
 		extract($this->settings[$Model->alias]);
 
 		$result = $Model->find('first', array(
@@ -188,7 +188,7 @@ class CouplerBehavior extends ModelBehavior {
  * @param boolean $primary
  * @return array
  */
-	public function afterFind($Model, $results, $primary = false) {
+	public function afterFind(Model $Model, $results, $primary = false) {
 		if (empty($results)) {
 			return $results;
 		}
