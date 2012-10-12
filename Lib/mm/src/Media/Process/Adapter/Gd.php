@@ -237,6 +237,34 @@ class Media_Process_Adapter_Gd extends Media_Process_Adapter {
 		return false;
 	}
 
+	public function fillImage($width, $height, $color){
+		$width  = (integer) $width;
+		$height = (integer) $height;
+
+		$old_width = $this->width();
+		$old_height = $this->height();
+
+		$image = imageCreateTrueColor($width, $height);
+		$rgb = $this->_rgb2array($color);
+		$new_color = imageColorAllocate($image, $rgb[0], $rgb[1], $rgb[2]);
+
+		imageCopy(
+			$image, 
+			$this->_object, 
+			(($width - $old_width) / 2), (($height - $old_height) / 2), 
+			0, 0, 
+			$width, $height
+		);
+
+		imageFill($image, 0, 0, $new_color);
+
+		if ($this->_isResource($image)) {
+			$this->_object = $image;
+			return true;
+		}
+		return false;
+	}
+
 	public function cropAndResize($cropLeft, $cropTop, $cropWidth, $cropHeight, $resizeWidth, $resizeHeight) {
 		$cropLeft     = (integer) $cropLeft;
 		$cropTop      = (integer) $cropTop;
@@ -305,6 +333,14 @@ class Media_Process_Adapter_Gd extends Media_Process_Adapter {
 				imageFill($target, 0, 0 , $white);
 			}
 		}
+	}
+
+	protected function _rgb2array($rgb) {
+		return array(
+			base_convert(substr($rgb, 0, 2), 16, 10),
+			base_convert(substr($rgb, 2, 2), 16, 10),
+			base_convert(substr($rgb, 4, 2), 16, 10),
+		);
 	}
 }
 

@@ -173,6 +173,13 @@ class Media_Process_Adapter_Imagick extends Media_Process_Adapter {
 		return $this->_object->resizeImage($width, $height, Imagick::FILTER_LANCZOS, 1);
 	}
 
+	public function fillImage($width, $height, $color){
+		$image = new Imagick();
+		$image->newImage($width, $height, new ImagickPixel($color));
+    	$this->_object = $image->compositeImage($this->_object, Imagick::COMPOSITE_ADD, (($width - $this->_object->getImageWidth()))/2, (($height - $this->_object->getImageHeight()))/2);
+    	return $this->_object;
+	}
+
 	public function cropAndResize($cropLeft, $cropTop, $cropWidth, $cropHeight, $resizeWidth, $resizeHeight) {
 		return $this->crop($cropLeft, $cropTop, $cropWidth, $cropHeight)
 			&& $this->resize($resizeWidth, $resizeHeight);
