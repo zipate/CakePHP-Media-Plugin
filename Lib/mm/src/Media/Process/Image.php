@@ -67,7 +67,7 @@ class Media_Process_Image extends Media_Process_Generic {
 			$new_width = floor($new_height * ($this->_adapter->width() / $this->_adapter->height()));
 		}
 
-		return $this->_adapter->fitInsideWhite($width, $height, $new_width, $new_height, $x, $y);
+		return $this->_adapter->fitInsideWhite($width, $height, $new_width, $new_height);
 	}
 
 	/**
