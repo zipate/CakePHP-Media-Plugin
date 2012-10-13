@@ -52,9 +52,8 @@ class Media_Process_Image extends Media_Process_Generic {
 		return $this->_adapter->resize($width, $height);
 	}
 
-	public function fitFill($width, $height, $color='FFFFFF') {
-		$this->fitInside($width, $height);
-		return $this->_adapter->fillImage($width, $height, $color);
+	public function fitInsideWhite($width, $height) {
+		return $this->_adapter->fitInsideWhite($width, $height);
 	}
 
 	/**

@@ -237,26 +237,35 @@ class Media_Process_Adapter_Gd extends Media_Process_Adapter {
 		return false;
 	}
 
-	public function fillImage($width, $height, $color){
-		$width  = (integer) $width;
-		$height = (integer) $height;
+	public function fitInsideWhite($width, $height){
+		$dst_width  = (integer) $width;
+		$dst_height = (integer) $height;
+		$src_width = $this->width();
+		$src_height = $this->height();
 
-		$old_width = $this->width();
-		$old_height = $this->height();
+		$image = imageCreateTrueColor($dst_width, $dst_height);
+		imageFill($image, 0, 0, imageColorAllocate($image, 255, 255, 255));
 
-		$image = imageCreateTrueColor($width, $height);
-		$rgb = $this->_rgb2array($color);
-		$new_color = imageColorAllocate($image, $rgb[0], $rgb[1], $rgb[2]);
+		$new_width = $dst_width;
+		$new_height = floor($new_width*($src_height/$src_width));
+		$new_x = 0;
+		$new_y = floor(($dst_height-$new_height)/2);
+		
+		if($new_height > $src_height){
+			$new_height = $height;
+			$new_width = floor($new_height*($src_width/$src_height));
+			$x = floor(($dst_width - $new_width)/2);
+			$y = 0;
+		}
 
-		imageCopy(
+		imageCopyResampled(
 			$image, 
 			$this->_object, 
-			(($width - $old_width) / 2), (($height - $old_height) / 2), 
-			0, 0, 
-			$width, $height
+			$new_x, $new_y,
+			0, 0,
+			$new_width, $new_height,
+			$src_width, $src_height
 		);
-
-		imageFill($image, 0, 0, $new_color);
 
 		if ($this->_isResource($image)) {
 			$this->_object = $image;
