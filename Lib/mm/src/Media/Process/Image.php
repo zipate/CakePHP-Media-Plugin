@@ -54,9 +54,9 @@ class Media_Process_Image extends Media_Process_Generic {
 
 	/**
 	 * Resize media proportionally keeping both sides within given dimension and fills remaining space with white
-	 * @param  [type] $width  [description]
-	 * @param  [type] $height [description]
-	 * @return [type]         [description]
+	 * @param  integer $width
+	 * @param  integer $height
+	 * @return boolean
 	 */
 	public function fitInsideWhite($width, $height) {
 		$new_width = $width;
