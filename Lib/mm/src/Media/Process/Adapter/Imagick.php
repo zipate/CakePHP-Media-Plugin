@@ -173,9 +173,9 @@ class Media_Process_Adapter_Imagick extends Media_Process_Adapter {
 		return $this->_object->resizeImage($width, $height, Imagick::FILTER_LANCZOS, 1);
 	}
 
-	public function fitInsideWhite($width, $height, $color){
-		$this->fitInside($width, $height);
-		return $this->extentImage($width, $height, floor(($width - $this->_object->getImageWidth()) / 2), floor(($height - $this->_object->getImageHeight()) / 2));
+	public function fitInsideWhite($width, $height, $new_width, $new_height, $x, $y){
+		return $this->resize($new_width, $new_height)
+			&& $this->_object->extentImage($width, $height, $x, $y);
 	}
 
 	public function cropAndResize($cropLeft, $cropTop, $cropWidth, $cropHeight, $resizeWidth, $resizeHeight) {
