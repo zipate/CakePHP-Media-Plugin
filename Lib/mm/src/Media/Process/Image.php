@@ -52,17 +52,19 @@ class Media_Process_Image extends Media_Process_Generic {
 		return $this->_adapter->resize($width, $height);
 	}
 
+	/**
+	 * Resize media proportionally keeping both sides within given dimension and fills remaining space with white
+	 * @param  [type] $width  [description]
+	 * @param  [type] $height [description]
+	 * @return [type]         [description]
+	 */
 	public function fitInsideWhite($width, $height) {
-		$x = $y = 0;
 		$new_width = $width;
 		$new_height = floor($new_width * ($this->_adapter->height() / $this->_adapter->width()));
-		$y = floor(($height - $new_height) / 2);
 		
 		if($new_height > $this->_adapter->height()){
 			$new_height = $height;
 			$new_width = floor($new_height * ($this->_adapter->width() / $this->_adapter->height()));
-			$x = floor(($width - $new_width) / 2);
-			$y = 0;
 		}
 
 		return $this->_adapter->fitInsideWhite($width, $height, $new_width, $new_height, $x, $y);

@@ -237,13 +237,17 @@ class Media_Process_Adapter_Gd extends Media_Process_Adapter {
 		return false;
 	}
 
-	public function fitInsideWhite($width, $height, $new_width, $new_height, $x, $y){
+	public function fitInsideWhite($width, $height, $new_width, $new_height){
 		$width  = (integer) $width;
 		$height = (integer) $height;
 		$new_width = (integer) $new_width;
 		$new_height = (integer) $new_height;
-		$x = (integer) $x;
-		$y = (integer) $y;
+
+		$x = $y = 0;
+		if($new_height > $this->height())
+			$x = floor(($width - $new_width) / 2);
+		else
+			$y = floor(($height - $new_height) / 2);
 
 		$image = imageCreateTrueColor($width, $height);
 		imageFill($image, 0, 0, imageColorAllocate($image, 255, 255, 255));
