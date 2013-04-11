@@ -191,7 +191,14 @@ class TransferBehavior extends ModelBehavior {
 			unset($Model->data[$Model->alias]['file']);
 			return true;
 		}
-
+		/*START CHANGE
+		*  Added the code to re-instantiate and allow save multiple models at once
+		*/
+		if (!$this->_prepare($Model, $file)) {
+			$Model->invalidate('file', 'error');
+			return false;
+		}
+		// END
 		if (!$file = $this->transfer($Model, $file)) {
 			return false;
 		}
